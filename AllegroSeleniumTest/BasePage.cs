@@ -9,9 +9,17 @@ namespace AllegroSeleniumTest
     {
         protected IWebDriver driver;
 
+
         public BasePage(IWebDriver driver)
         {
             this.driver = driver;
+        }
+
+        public abstract string Url { get; }
+
+        public void Navigate()
+        {
+            driver.Url = Settings.Default.AllegroHost + Url;
         }
 
         public IWebElement FindElement(By by) 
