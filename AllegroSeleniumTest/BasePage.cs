@@ -17,19 +17,26 @@ namespace AllegroSeleniumTest
 
         public abstract string Url { get; }
 
+        public string Title => driver.Title;
+
         public void Navigate()
         {
             driver.Url = Settings.Default.AllegroHost + Url;
         }
 
-        public IWebElement FindElement(By by) 
+        public void Close()
         {
-            return driver.FindElement(by); // jak nie znajdzie elementu to rzuca wyjątek
+            driver.Close();
         }
 
-        public bool HasElement(By by)
+        public IWebElement FindElement(string selectoor) 
         {
-            return driver.FindElements(by).Count > 0; // Tutaj jak nie znajdzie to nie rzuci wyjątku
+            return driver.FindElement(By.CssSelector(selectoor)); // jak nie znajdzie elementu to rzuca wyjątek
+        }
+
+        public bool HasElement(string selector)
+        {
+            return driver.FindElements(By.CssSelector(selector)).Count > 0; // Tutaj jak nie znajdzie to nie rzuci wyjątku
         }
     }
 }
